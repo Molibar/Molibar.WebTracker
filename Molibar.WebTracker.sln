@@ -1,0 +1,55 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Molibar.WebTracking.Domain", "Molibar.WebTracking.Domain\Molibar.WebTracking.Domain.csproj", "{57FB5985-88BB-4982-B2A0-963D6F15C68F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Molibar.WebTracking.External", "Molibar.WebTracking.External\Molibar.WebTracking.External.csproj", "{8639B1DF-CCDE-4353-A0E0-2054D360434F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Molibar.WebTracking.IntegrationTests", "Molibar.WebTracking.IntegrationTests\Molibar.WebTracking.IntegrationTests.csproj", "{C86E2B42-8B3D-4D0B-86AD-6F0331AE8D66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Molibar.WebTracking.Presentation", "Molibar.WebTracking.Presentation\Molibar.WebTracking.Presentation.csproj", "{6FC29E1C-6130-4645-BC2F-D7681939768A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Molibar.WebTracking.UnitTests", "Molibar.WebTracking.UnitTests\Molibar.WebTracking.UnitTests.csproj", "{D113F829-D491-439D-9EAC-F2128795D93F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Molibar.WebTracking.Web", "Molibar.WebTracking.Web\Molibar.WebTracking.Web.csproj", "{4843A20E-D20D-4AFC-8D47-5312ED1B10CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FAC2441B-0227-4669-A53B-4850474AEE97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57FB5985-88BB-4982-B2A0-963D6F15C68F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57FB5985-88BB-4982-B2A0-963D6F15C68F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57FB5985-88BB-4982-B2A0-963D6F15C68F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57FB5985-88BB-4982-B2A0-963D6F15C68F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8639B1DF-CCDE-4353-A0E0-2054D360434F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8639B1DF-CCDE-4353-A0E0-2054D360434F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8639B1DF-CCDE-4353-A0E0-2054D360434F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8639B1DF-CCDE-4353-A0E0-2054D360434F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C86E2B42-8B3D-4D0B-86AD-6F0331AE8D66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C86E2B42-8B3D-4D0B-86AD-6F0331AE8D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C86E2B42-8B3D-4D0B-86AD-6F0331AE8D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C86E2B42-8B3D-4D0B-86AD-6F0331AE8D66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FC29E1C-6130-4645-BC2F-D7681939768A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FC29E1C-6130-4645-BC2F-D7681939768A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FC29E1C-6130-4645-BC2F-D7681939768A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FC29E1C-6130-4645-BC2F-D7681939768A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D113F829-D491-439D-9EAC-F2128795D93F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D113F829-D491-439D-9EAC-F2128795D93F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D113F829-D491-439D-9EAC-F2128795D93F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D113F829-D491-439D-9EAC-F2128795D93F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4843A20E-D20D-4AFC-8D47-5312ED1B10CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4843A20E-D20D-4AFC-8D47-5312ED1B10CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4843A20E-D20D-4AFC-8D47-5312ED1B10CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4843A20E-D20D-4AFC-8D47-5312ED1B10CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C86E2B42-8B3D-4D0B-86AD-6F0331AE8D66} = {FAC2441B-0227-4669-A53B-4850474AEE97}
+		{D113F829-D491-439D-9EAC-F2128795D93F} = {FAC2441B-0227-4669-A53B-4850474AEE97}
+	EndGlobalSection
+EndGlobal
