@@ -64,9 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IoC\ExternalRegistry.cs" />
-    <Compile Include="Models\Profiles\FormEventProfile.cs" />
+    <Compile Include="Models\Profiles\FormEventBsonDocumentProfile.cs" />
+    <Compile Include="Models\Profiles\FormEventReplaceableAttributesProfile.cs" />
+    <Compile Include="Models\Profiles\PageEventBsonDocumentProfile.cs" />
     <Compile Include="MongoDb\MongoDbProxy.cs" />
+    <Compile Include="MongoDb\Tracking\EventRepository.cs" />
     <Compile Include="MongoDb\Tracking\FormEventRepository.cs" />
+    <Compile Include="MongoDb\Tracking\PageEventRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleDb\SimpleDbProxy.cs" />
     <Compile Include="SimpleDb\Tracking\FormEventRepository.cs" />

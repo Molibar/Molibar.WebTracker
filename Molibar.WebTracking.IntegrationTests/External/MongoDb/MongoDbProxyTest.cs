@@ -16,10 +16,14 @@ namespace Molibar.WebTracking.IntegrationTests.External.MongoDb
     {
         private MongoDbProxy _mongoDbProxy;
         private string _collectionName;
+        private EntityMapper _entityMapper;
 
         [SetUp]
         public void SetUp()
         {
+            Mapper.AddProfile(new FormEventBsonDocumentProfile());
+            _entityMapper = new EntityMapper(Mapper.Engine);
+
             _mongoDbProxy = new MongoDbProxy();
             _collectionName = "DefaultTestCollection";
             if (!_mongoDbProxy.CollectionExists(_collectionName))
@@ -36,13 +40,11 @@ namespace Molibar.WebTracking.IntegrationTests.External.MongoDb
         public void ShouldAddAndRemove_1000_Elements()
         {
             // Arrange
-            var expectedCount = 1000;
-            var formEvents = Builder<FormEvent>.CreateListOfSize(1000)
+            var expectedCount = 123;
+            var formEvents = Builder<FormEvent>.CreateListOfSize(expectedCount)
                 .All().With(x=> x.Id = BsonObjectId.GenerateNewId().ToString())
                 .Build();
-            Mapper.AddProfile(new FormEventProfile());
-            var entityMapper = new EntityMapper(Mapper.Engine);
-            var bsonDocuments = entityMapper.Map<IList<BsonDocument>>(formEvents);
+            var bsonDocuments = _entityMapper.Map<IList<BsonDocument>>(formEvents);
 
             // Act
             _mongoDbProxy.Insert(_collectionName, bsonDocuments);

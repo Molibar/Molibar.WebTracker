@@ -9,6 +9,7 @@ namespace Molibar.WebTracking.External.SimpleDb
     {
         void CreateDomain(string domainName);
         bool DomainExists(string domainName);
+        void Put(string domainName, string itemName, List<ReplaceableAttribute> replaceableAttributes);
     }
 
     public class SimpleDbProxy : ISimpleDbProxy
@@ -16,15 +17,13 @@ namespace Molibar.WebTracking.External.SimpleDb
         private AmazonSimpleDB _simpleDbClient;
         public const string DATE_FORMAT_STRING = "yyyy-MM-ddTHH:mm:ss";
 
-        public SimpleDbProxy(string domainName)
+        public SimpleDbProxy()
         {
             _simpleDbClient = AWSClientFactory.CreateAmazonSimpleDBClient(new AmazonSimpleDBConfig());
-            //if(!DomainExists(domainName)) CreateDomain(domainName);
         }
 
         public void CreateDomain(string domainName)
         {
-            // Amazon.SimpleDB.Model.
             var createDomainRequest = new CreateDomainRequest
                                           {
                                               DomainName = domainName

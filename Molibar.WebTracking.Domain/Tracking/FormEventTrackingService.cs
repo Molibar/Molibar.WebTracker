@@ -3,11 +3,16 @@ using Molibar.WebTracking.Domain.Repositories;
 
 namespace Molibar.WebTracking.Domain.Tracking
 {
-    public class FormEventTracker
+    public interface IFormEventTrackingService
+    {
+        FormEvent Add(FormEvent formEvent);
+    }
+
+    public class FormEventTrackingService : IFormEventTrackingService
     {
         private IFormEventRepository _formEventRepository;
         
-        public FormEventTracker(IFormEventRepository formEventRepository)
+        public FormEventTrackingService(IFormEventRepository formEventRepository)
         {
             _formEventRepository = formEventRepository;
         }

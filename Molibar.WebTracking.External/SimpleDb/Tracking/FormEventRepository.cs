@@ -1,28 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using Amazon.SimpleDB.Model;
-using Molibar.Infrastructure.Mapper.AutoMapper;
+using Molibar.Infrastructure.Mapper;
 using Molibar.WebTracking.Domain.Model;
 using Molibar.WebTracking.Domain.Repositories;
 
 namespace Molibar.WebTracking.External.SimpleDb.Tracking
 {
 
-    public class FormEventRepository : SimpleDbProxy, IFormEventRepository
+    public class FormEventRepository : IFormEventRepository
     {
-        private readonly EntityMapper _entityMapper;
+        private readonly ISimpleDbProxy _simpleDbProxy;
+        private readonly IEntityMapper _entityMapper;
         public const string DOMAIN_NAME = "FormEvents";
 
-        public FormEventRepository(EntityMapper entityMapper) : base(DOMAIN_NAME)
+        public FormEventRepository(ISimpleDbProxy simpleDbProxy, IEntityMapper entityMapper)
         {
+            _simpleDbProxy = simpleDbProxy;
             _entityMapper = entityMapper;
         }
 
         public void Initialize()
         {
-            if (!DomainExists(DOMAIN_NAME))
+            if (!_simpleDbProxy.DomainExists(DOMAIN_NAME))
             {
-                CreateDomain(DOMAIN_NAME);
+                _simpleDbProxy.CreateDomain(DOMAIN_NAME);
             }
         }
 
@@ -31,7 +33,7 @@ namespace Molibar.WebTracking.External.SimpleDb.Tracking
         {
             formEvent.Id = Guid.NewGuid().ToString();
             var replaceableAttributes = _entityMapper.Map<List<ReplaceableAttribute>>(formEvent);
-            Put(DOMAIN_NAME, formEvent.Id, replaceableAttributes);
+            _simpleDbProxy.Put(DOMAIN_NAME, formEvent.Id, replaceableAttributes);
         }
     }
 }

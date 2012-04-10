@@ -14,7 +14,7 @@ namespace Molibar.WebTracking.Web.Controllers
         {
             return View(new DemoViewModel
             {
-                FormName = "DemoForm",
+                PageId = "DemoForm",
                 VisitGuid = Guid.NewGuid(),
                 SelectList = GetSelectList()
             });
@@ -25,7 +25,7 @@ namespace Molibar.WebTracking.Web.Controllers
         {
             return View("Index", new DemoViewModel
             {
-                FormName = "DemoForm",
+                PageId = "DemoForm",
                 StringValue = demoPostModel.StringValue,
                 CheckBox = demoPostModel.Checkbox,
                 SelectList = GetSelectList(demoPostModel.Selected),

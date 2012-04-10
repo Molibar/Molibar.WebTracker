@@ -7,7 +7,7 @@ namespace Molibar.WebTracking.Web.Models.Demo
     public class DemoViewModel
     {
         public Guid VisitGuid { get; set; }
-        public string FormName { get; set; }
+        public string PageId { get; set; }
 
         [Display(Name = "String Value")]
         [Required(ErrorMessage = "Please enter something")]

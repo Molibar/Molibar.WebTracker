@@ -48,7 +48,10 @@
   <ItemGroup>
     <Compile Include="IoC\PresentationRegistry.cs" />
     <Compile Include="Models\FormEventPostModel.cs" />
-    <Compile Include="Models\Profiles\FormEventProfile.cs" />
+    <Compile Include="Models\PageEventPostModel.cs" />
+    <Compile Include="Models\Profiles\EventEventPostModelProfile.cs" />
+    <Compile Include="Models\Profiles\FormEventFormEventPostModelProfile.cs" />
+    <Compile Include="Models\Profiles\PageEventPageEventPostModelProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

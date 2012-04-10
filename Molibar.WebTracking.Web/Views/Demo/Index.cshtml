@@ -19,30 +19,32 @@
     </head>
     <body>
         <style>.field-validation-error {
-    color: #ff0000;
-}
+     color: #ff0000;
+ }
 
-.field-validation-valid {
-    display: none;
-}
+ .field-validation-valid {
+     display: none;
+ }
 
-.input-validation-error {
-    border: 1px solid #ff0000;
-    background-color: #ffeeee;
-}
+ .input-validation-error {
+     border: 1px solid #ff0000;
+     background-color: #ffeeee;
+ }
 
-.validation-summary-errors {
-    font-weight: bold;
-    color: #ff0000;
-}
+ .validation-summary-errors {
+     font-weight: bold;
+     color: #ff0000;
+ }
         </style>
-        <div>
+        @Html.Hidden("FormTrackerUrl", Url.Action("FormEvent", "Tracking"))
+        @Html.Hidden("PageTrackerUrl", Url.Action("PageEvent", "Tracking"))
+        <div id="scrollable" style="height:180px;background-color:#ccc;overflow:auto">
             @using (Html.BeginForm("Submit", "Demo", FormMethod.Post, new { id = "demo" }))
             {
-                @Html.HiddenFor(x=> x.FormName)
-                @Html.HiddenFor(x=> x.VisitGuid)
+                @Html.HiddenFor(x => x.PageId)
+                @Html.HiddenFor(x => x.VisitGuid)
                 <div>@Html.LabelFor(x => x.StringValue)</div>
-                <div>@Html.TextBoxFor(x => x.StringValue, new {placeholder = "The String Value"})</div>
+                <div>@Html.TextBoxFor(x => x.StringValue, new { placeholder = "The String Value" })</div>
                 <div>@Html.ValidationMessageFor(x => x.StringValue)</div>
 
                 <div>@Html.LabelFor(x => x.CheckBox)</div>
@@ -55,8 +57,14 @@
                 <div>
                     <button id="submit" type="submit" value="Submit">Get your <b>results</b></button>
                 </div>
+                <div style="background-color: #aaa;height:100px"></div>
             }
         </div>
+        <div>
+            Events Log
+        </div>
+        <div id="events">
+            
+        </div>
     </body>
-    
 </html>

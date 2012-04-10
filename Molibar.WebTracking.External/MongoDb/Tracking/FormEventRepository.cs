@@ -6,39 +6,26 @@ using MongoDB.Bson;
 
 namespace Molibar.WebTracking.External.MongoDb.Tracking
 {
-    public class FormEventRepository : IFormEventRepository
+    public class FormEventRepository : EventRepository, IFormEventRepository
     {
         public const string COLLECTION_NAME = "FormEvents";
-
-        private readonly IMongoDbProxy _mongoDbProxy;
-        private readonly IEntityMapper _entityMapper;
+        protected override string CollectionName { get { return COLLECTION_NAME; } }
 
         public FormEventRepository(IMongoDbProxy mongoDbProxy, IEntityMapper entityMapper)
+            : base(mongoDbProxy, entityMapper)
         {
-            _mongoDbProxy = mongoDbProxy;
-            _entityMapper = entityMapper;
         }
-
-        public void Initialize()
-        {
-            if (!_mongoDbProxy.CollectionExists(COLLECTION_NAME))
-            {
-                _mongoDbProxy.CreateCollection(COLLECTION_NAME);
-            }
-        }
-
 
         public void Insert(FormEvent formEvent)
         {
-            var bsonDocument = _entityMapper.Map<BsonDocument>(formEvent);
-            _mongoDbProxy.Insert(COLLECTION_NAME, new[] { bsonDocument });
+            var bsonDocument = EntityMapper.Map<BsonDocument>(formEvent);
+            Insert(new[] { bsonDocument });
         }
-
 
         public void Insert(IEnumerable<FormEvent> formEntries)
         {
-            var bsonDocuments = _entityMapper.Map<IEnumerable<BsonDocument>>(formEntries);
-            _mongoDbProxy.Insert(COLLECTION_NAME, bsonDocuments);
+            var bsonDocuments = EntityMapper.Map<IEnumerable<BsonDocument>>(formEntries);
+            Insert(bsonDocuments);
         }
     }
 }

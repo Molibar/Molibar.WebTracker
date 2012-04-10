@@ -36,7 +36,6 @@ namespace Molibar.WebTracking.Web
             var oldProvider = FilterProviders.Providers.Single(f => f is FilterAttributeFilterProvider);
             FilterProviders.Providers.Remove(oldProvider);
             FilterProviders.Providers.Add(new InjectableFilterProvider(container));
-
         }
 
         protected void Application_Start()

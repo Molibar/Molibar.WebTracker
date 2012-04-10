@@ -20,7 +20,7 @@ namespace Molibar.WebTracking.External.MongoDb
 
         public MongoDbProxy()
         {
-            _mongoDatabase = MongoDatabase.Create("mongodb://127.0.0.1:27017/test");
+            _mongoDatabase = MongoDatabase.Create("mongodb://127.0.0.1:27017/WebTrackerTest");
         }
 
         public bool CollectionExists(string collectionName)

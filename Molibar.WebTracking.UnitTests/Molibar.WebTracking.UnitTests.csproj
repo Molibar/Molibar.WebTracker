@@ -40,11 +40,15 @@
     <Reference Include="FizzWare.NBuilder">
       <HintPath>..\packages\NBuilder.3.0.1.1\lib\FizzWare.NBuilder.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Molibar.Common">
       <HintPath>..\..\bin\Molibar.Framework.1_0_0\Molibar.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Molibar.Infrastructure">
-      <HintPath>..\..\bin\Molibar.Framework.1_0_0\Molibar.Infrastructure.dll</HintPath>
+    <Reference Include="Molibar.Infrastructure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Molibar.Framework\Molibar.Framework\Molibar.Infrastructure\bin\Debug\Molibar.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Bson, Version=1.4.0.4468, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -57,20 +61,48 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=2.6.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="External\Models\Profiles\FormEventProfileTests.cs" />
+    <Compile Include="Domain\IoC\DomainRegistryTest.cs" />
+    <Compile Include="Domain\Tracking\FormEventTrackingServiceTest.cs" />
+    <Compile Include="Domain\Tracking\PageEventTrackingServiceTest.cs" />
+    <Compile Include="External\IoC\ExternalRegistryTest.cs" />
+    <Compile Include="External\Models\Profiles\FormEventBsonDocumentProfileTests.cs" />
+    <Compile Include="External\Models\Profiles\FormEventReplaceableAttributesProfileTests.cs" />
+    <Compile Include="External\Models\Profiles\PageEventBsonDocumentProfileTests.cs" />
+    <Compile Include="External\MongoDb\Tracking\PageEventRepository_Initialize_Test.cs" />
+    <Compile Include="External\MongoDb\Tracking\PageEventRepositoryInsertTest.cs" />
+    <Compile Include="External\MongoDb\Tracking\EventRepositoryTest.cs" />
+    <Compile Include="External\MongoDb\Tracking\FormEventRepositoryTest.cs" />
+    <Compile Include="External\MongoDb\Tracking\FormEventRepository_Initialize_Test.cs" />
+    <Compile Include="External\MongoDb\Tracking\FormEventRepository_Insert_Test.cs" />
+    <Compile Include="External\MongoDb\Tracking\PageEventRepositoryTest.cs" />
     <Compile Include="External\SimpleDb\SimpleDbProxyTest.cs" />
+    <Compile Include="External\SimpleDb\Tracking\FormEventRepositoryTest.cs" />
+    <Compile Include="External\SimpleDb\Tracking\FormEventRepository_Initialize_Test.cs" />
+    <Compile Include="External\SimpleDb\Tracking\FormEventRepository_Insert_Test.cs" />
+    <Compile Include="Presentation\IoC\PresentationRegistryTest.cs" />
+    <Compile Include="Presentation\Models\Profiles\FormEventFormEventPostModelProfileTest.cs" />
+    <Compile Include="Presentation\Models\Profiles\PageEventPageEventPostModelProfileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\Areas\Api\ApiAreaRegistrationTest.cs" />
+    <Compile Include="Web\Controllers\DemoControllerTest.cs" />
+    <Compile Include="Web\Areas\Api\Controllers\TrackingControllerTest.cs" />
+    <Compile Include="Web\Controllers\StatusControllerTest.cs" />
+    <Compile Include="Web\IoC\IoCTest.cs" />
+    <Compile Include="Web\MvcApplicationTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -82,7 +114,16 @@
       <Project>{8639B1DF-CCDE-4353-A0E0-2054D360434F}</Project>
       <Name>Molibar.WebTracking.External</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Molibar.WebTracking.Presentation\Molibar.WebTracking.Presentation.csproj">
+      <Project>{6FC29E1C-6130-4645-BC2F-D7681939768A}</Project>
+      <Name>Molibar.WebTracking.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Molibar.WebTracking.Web\Molibar.WebTracking.Web.csproj">
+      <Project>{4843A20E-D20D-4AFC-8D47-5312ED1B10CE}</Project>
+      <Name>Molibar.WebTracking.Web</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

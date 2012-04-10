@@ -48,9 +48,12 @@
   <ItemGroup>
     <Compile Include="IoC\DomainRegistry.cs" />
     <Compile Include="Model\FormEvent.cs" />
+    <Compile Include="Model\PageEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IFormEventRepository.cs" />
-    <Compile Include="Tracking\FormEventTracker.cs" />
+    <Compile Include="Repositories\IPageEventRepository.cs" />
+    <Compile Include="Tracking\FormEventTrackingService.cs" />
+    <Compile Include="Tracking\PageEventTrackingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
