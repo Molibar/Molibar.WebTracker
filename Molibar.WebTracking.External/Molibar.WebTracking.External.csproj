@@ -64,7 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IoC\ExternalRegistry.cs" />
+    <Compile Include="Models\FormEventDataModel.cs" />
     <Compile Include="Models\Profiles\FormEventBsonDocumentProfile.cs" />
+    <Compile Include="Models\Profiles\FormEventFormEventDobProfile.cs" />
     <Compile Include="Models\Profiles\FormEventReplaceableAttributesProfile.cs" />
     <Compile Include="Models\Profiles\PageEventBsonDocumentProfile.cs" />
     <Compile Include="MongoDb\MongoDbProxy.cs" />

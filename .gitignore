@@ -30,6 +30,7 @@ packages
 *.log
 *.sql
 *.sqlite
+log.xml*
 
 # OS generated files #
 ######################
@@ -43,3 +44,8 @@ Thumbs.db
 *.suo
 *.user
 _ReSharper.*
+
+# NCrunch - Test #
+##################
+*crunchsolution*
+*.ncrunchproject

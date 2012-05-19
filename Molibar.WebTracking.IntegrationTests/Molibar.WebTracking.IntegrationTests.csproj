@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="External\MongoDb\FormReportRepositoryTest.cs" />
     <Compile Include="External\MongoDb\MongoDbProxyTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

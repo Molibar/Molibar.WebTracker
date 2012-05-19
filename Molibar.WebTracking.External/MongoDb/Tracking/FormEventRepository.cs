@@ -8,7 +8,7 @@ namespace Molibar.WebTracking.External.MongoDb.Tracking
 {
     public class FormEventRepository : EventRepository, IFormEventRepository
     {
-        public const string COLLECTION_NAME = "FormEvents";
+        public const string COLLECTION_NAME = "PageEvents";
         protected override string CollectionName { get { return COLLECTION_NAME; } }
 
         public FormEventRepository(IMongoDbProxy mongoDbProxy, IEntityMapper entityMapper)

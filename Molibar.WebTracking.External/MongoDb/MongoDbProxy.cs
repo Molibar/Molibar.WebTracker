@@ -16,51 +16,66 @@ namespace Molibar.WebTracking.External.MongoDb
 
     public class MongoDbProxy : IMongoDbProxy
     {
-        private MongoDatabase _mongoDatabase;
+        public MongoDatabase MongoDatabase { get; set; }
 
-        public MongoDbProxy()
+        public MongoDbProxy(string databaseName = "WebTracker")
         {
-            _mongoDatabase = MongoDatabase.Create("mongodb://127.0.0.1:27017/WebTrackerTest");
+            var settings =
+                new MongoServerSettings
+                    {
+                        Server = new MongoServerAddress("localhost", 27017),
+                        SafeMode = SafeMode.True
+                    };
+            var mongoServer = new MongoServer(settings);
+            MongoDatabase = mongoServer.GetDatabase(databaseName);
+
+            //_mongoServer = MongoServer.Create("mongodb://127.0.0.1:27017/?safe=true");
+            //_mongoDatabase = _mongoServer.GetDatabase("WebTracker");
         }
 
-        public bool CollectionExists(string collectionName)
+        internal void DropDatabase()
         {
-            return _mongoDatabase.CollectionExists(collectionName);
-        }
-
-        public void CreateCollection(string collectionName)
-        {
-            _mongoDatabase.CreateCollection(collectionName);
+            MongoDatabase.Drop();
         }
 
         public bool RemoveCollection(string collectionName)
         {
-            var commandResult = _mongoDatabase.DropCollection(collectionName);
+            var commandResult = MongoDatabase.DropCollection(collectionName);
             return commandResult.Ok;
+        }
+
+        public bool CollectionExists(string collectionName)
+        {
+            return MongoDatabase.CollectionExists(collectionName);
+        }
+
+        public void CreateCollection(string collectionName)
+        {
+            MongoDatabase.CreateCollection(collectionName);
         }
 
         public void Insert(string collectionName, IEnumerable<BsonDocument> bsonDocuments)
         {
-            var collection = _mongoDatabase.GetCollection(collectionName);
+            var collection = MongoDatabase.GetCollection(collectionName);
             collection.InsertBatch(bsonDocuments);
         }
 
         public MongoCursor<BsonDocument> FindAll(string collectionName)
         {
-            var collection = _mongoDatabase.GetCollection(collectionName);
+            var collection = MongoDatabase.GetCollection(collectionName);
             return collection.FindAll();
         }
 
         public MongoCursor<BsonDocument> Find(string collectionName, string name, string value)
         {
-            var collection = _mongoDatabase.GetCollection(collectionName);
+            var collection = MongoDatabase.GetCollection(collectionName);
             var queryDocument = new QueryDocument(name, value);
             return collection.Find(queryDocument);
         }
 
         public void RemoveDocuments(string collectionName)
         {
-            var collection = _mongoDatabase.GetCollection(collectionName);
+            var collection = MongoDatabase.GetCollection(collectionName);
             collection.RemoveAll();
         }
     }

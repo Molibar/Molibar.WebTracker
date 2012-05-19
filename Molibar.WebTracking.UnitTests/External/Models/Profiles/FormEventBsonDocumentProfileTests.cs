@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using AutoMapper;
 using FizzWare.NBuilder;
 using Molibar.Infrastructure.Mapper.AutoMapper;
@@ -61,19 +61,19 @@ namespace Molibar.WebTracking.UnitTests.External.Models.Profiles
             var clientDateTime = new DateTime(1234, 5, 6, 17, 18, 1, 90);
             var dateTime = new DateTime(1234, 5, 6, 17, 18, 19, 20);
             var bsonDocument = new BsonDocument
-                       {
-                           {"_id", BsonObjectId.Create(1234,1234,1234,1234)},
-                           {"VisitGuid", Guid.NewGuid()},
-                           {"Url", "Url"},
-                           {"PageId", "PageId"},
-                           {"ElementId", "ElementId"},
-                           {"EventType", "EventType"},
-                           {"ElementType", "ElementType"},
-                           {"ElementValue", "ElementValue"},
-                           {"ValueValid", true},
-                           {"ClientDateTime", clientDateTime},
-                           {"DateTime", dateTime}
-                       };
+                                   {
+                                       {"_id", BsonObjectId.Create(1234, 1234, 1234, 1234)},
+                                       {"VisitGuid", Guid.NewGuid()},
+                                       {"Url", "Url"},
+                                       {"PageId", "PageId"},
+                                       {"ElementId", "ElementId"},
+                                       {"EventType", "EventType"},
+                                       {"ElementType", "ElementType"},
+                                       {"ElementValue", "ElementValue"},
+                                       {"ValueValid", true},
+                                       {"ClientDateTime", clientDateTime},
+                                       {"DateTime", dateTime}
+                                   };
 
             // Act
             var result = _entityMapper.Map<FormEvent>(bsonDocument);

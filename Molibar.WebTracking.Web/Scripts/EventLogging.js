@@ -1,43 +1,54 @@
 ﻿var settingsAjaxTimeout = 1000;
 $(document).ready(function (event) {
-    logEventToDiv(getEvent('document', 'ready'));
+    logPageEvent(getEvent('document', 'ready'));
     $(window).load(windowLoadHandler);
     $(window).scroll(windowScrollHandler);
     $(window).resize(windowResizeHandler);
     $(document).click(clickHandler);
+    $(document).mousemove(mouseMoveHandler);
     $('*').scroll(scrollHandler);
 
     $("input").each(attachHandlers);
     $("select").each(attachHandlers);
 });
 
-
-function getPos(id, eventType, elementType, posX, posY) {
+function getPosEvent(id, eventType, elementType, posX, posY) {
     return { 'id': id, 'eventType': eventType, 'elementType': elementType, 'x': posX, 'y': posY };
 }
 
+// Used primarilly for window or document events where no
+// state, like a value or position, is kept.
 function getEvent(id, eventType, elementType) {
-    return getPos(id, eventType, elementType, null, null);
-}
-
-function clickHandler(event) {
-    logEventToDiv(getPos(event.target.id, event.type, event.target.type, event.pageX, event.pageY));
+    return getPosEvent(id, eventType, elementType, null, null);
 }
 
 function windowLoadHandler(event) {
-    logEventToDiv(getEvent('window', event.type, 'window'));
+    logPageEvent(getEvent('window', event.type, 'window'));
+}
+
+function mouseMoveHandler(event) {
+    var posEvent = getPosEvent(event.target.id, event.type, event.target.type, event.pageX, event.pageY);
+    logPageEvent(posEvent);
 }
 
 function windowResizeHandler(event) {
-    logEventToDiv(getPos('window', event.type, 'window', $(window).height(), $(this).width()));
+    var posEvent = getPosEvent('window', event.type, 'window', $(window).height(), $(this).width());
+    logPageEvent(posEvent);
 }
 
 function windowScrollHandler(event) {
-    logEventToDiv(getPos('window', event.type, 'window', $(window).scrollLeft(), $(this).scrollTop()));
+    var posEvent = getPosEvent('window', event.type, 'window', $(window).scrollLeft(), $(this).scrollTop());
+    logPageEvent(posEvent);
 }
 
 function scrollHandler(event) {
-    logEventToDiv(getPos(event.target.id, event.type, event.target.type, event.target.scrollLeft, event.target.scrollTop));
+    var posEvent = getPosEvent(event.target.id, event.type, event.target.type, event.target.scrollLeft, event.target.scrollTop); nt(event.target.id, event.type, event.target.type, event.target.scrollLeft, event.target.scrollTop); nt(event.target.id, event.type, event.target.type, event.target.scrollLeft, event.target.scrollTop);
+    logPageEvent(posEvent);
+}
+
+function clickHandler(event) {
+    var posEvent = getPosEvent(event.target.id, event.type, event.target.type, event.pageX, event.pageY);
+    logPageEvent(posEvent);
 }
 
 function getFormEvent(id, eventType, type, value, valid) {
@@ -53,7 +64,6 @@ function logElementEvent(element, event) {
     var valid = true;
     var req = getFormEvent(element.context.id, event.type, element.context.type, getValue(element), valid, true);
     logFormEvent(req);
-    logEventToDiv(req);
 }
 
 function attachHandlers() {
@@ -72,22 +82,8 @@ function attachHandlers() {
     });
 }
 
-function logEventToDiv(obj) {
-    var row = jsonToString(obj);
-    $('#events').html(new Date().getTime() + ' ' + row + "<br/>" + $('#events').html());
-}
-
-function jsonToString(obj) {
-    var result = '';
-    for (var key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            result += key + " = " + obj[key] + ", ";
-        }
-    }
-    return result;
-}
-
-function logFormEvent(req) {
+function logFormEvent(formEvent) {
+    logEventToDiv(formEvent);
     var millisSince1970 = new Date().getTime();
     $.ajax({
         url: getFormTrackingUrl(),
@@ -96,11 +92,11 @@ function logFormEvent(req) {
             VisitGuid: getVisitGuid(),
             Url: getUrl(),
             PageId: getPageId(),
-            ElementId: req.id,
-            EventType: req.eventType,
-            ElementType: req.elementType,
-            ElementValue: req.elementValue,
-            ValueValid: req.valid,
+            ElementId: formEvent.id,
+            EventType: formEvent.eventType,
+            ElementType: formEvent.elementType,
+            ElementValue: formEvent.elementValue,
+            ValueValid: formEvent.valid,
             MillisSince1970: millisSince1970
         },
         success: function (response, status, xhr) {
@@ -112,7 +108,8 @@ function logFormEvent(req) {
     return false;
 }
 
-function logPageEvent(req) {
+function logPageEvent(pageEvent) {
+    logEventToDiv(pageEvent);
     var millisSince1970 = new Date().getTime();
     $.ajax({
         url: getPageTrackingUrl(),
@@ -121,11 +118,11 @@ function logPageEvent(req) {
             VisitGuid: getVisitGuid(),
             Url: getUrl(),
             PageId: getPageId(),
-            ElementId: req.id,
-            EventType: req.eventType,
-            ElementType: req.elementType,
-            X: req.x,
-            Y: req.y,
+            ElementId: pageEvent.id,
+            EventType: pageEvent.eventType,
+            ElementType: pageEvent.elementType,
+            X: pageEvent.x,
+            Y: pageEvent.y,
             MillisSince1970: millisSince1970
         },
         success: function (response, status, xhr) {
@@ -137,12 +134,12 @@ function logPageEvent(req) {
     return false;
 }
 
-function getVisitGuid() {
-    return $('#VisitGuid').val();
-}
-
 function getUrl() {
     return window.location.href;
+}
+
+function getVisitGuid() {
+    return $('#VisitGuid').val();
 }
 
 function getFormTrackingUrl() {
@@ -157,4 +154,19 @@ function getPageId() {
     var pageId = $('#PageId').val();
     if ((pageId == null) || (pageId.length == 0)) return '';
     return pageId;
+}
+
+function jsonToString(obj) {
+    var result = '';
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            result += key + " = " + obj[key] + ", ";
+        }
+    }
+    return result;
+}
+
+function logEventToDiv(obj) {
+    var row = jsonToString(obj);
+    $('#events').html(new Date().getTime() + ' ' + row + "<br/>" + $('#events').html());
 }

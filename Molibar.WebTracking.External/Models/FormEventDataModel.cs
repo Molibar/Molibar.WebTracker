@@ -1,10 +1,11 @@
 ﻿using System;
+using MongoDB.Bson;
 
-namespace Molibar.WebTracking.Domain.Model
+namespace Molibar.WebTracking.External.Models
 {
-    public class FormEvent
+    public class FormEventDataModel
     {
-        public string Id { get; set; }
+        public ObjectId Id { get; set; }
 
         public Guid VisitGuid { get; set; }
         public string Url { get; set; }

@@ -9,6 +9,7 @@ namespace Molibar.WebTracking.Presentation.Models.Profiles
         {
             CreateMap<FormEventPostModel, FormEvent>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.DateTime, opt => opt.Ignore())
                 .ForMember(dest => dest.ClientDateTime,
                 opt => opt.ResolveUsing(src => JavascriptTicksToDate(src.MillisSince1970)));
 
