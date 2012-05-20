@@ -49,7 +49,7 @@ GxEiNj3e99NQRSg=="), "Url" : "http://localhost:50342/Demo", "PageId" : "DemoForm
             var collection = _mongoDbProxy.MongoDatabase.GetCollection(_collectionName);
             var focusin = new FormEventDataModel
                               {
-                                  VisitGuid = guid,
+                                  VisitGuid = guid.ToString(),
                                   Url = "http://localhost:50342/Demo",
                                   PageId = "DemoForm",
                                   ElementId = "StringValue",
@@ -61,7 +61,7 @@ GxEiNj3e99NQRSg=="), "Url" : "http://localhost:50342/Demo", "PageId" : "DemoForm
             collection.Insert(focusin);
             var change = new FormEventDataModel
                              {
-                                 VisitGuid = guid,
+                                 VisitGuid = guid.ToString(),
                                  Url = "http://localhost:50342/Demo",
                                  PageId = "DemoForm",
                                  ElementId = "StringValue",
@@ -73,7 +73,7 @@ GxEiNj3e99NQRSg=="), "Url" : "http://localhost:50342/Demo", "PageId" : "DemoForm
             collection.Insert(change);
             var focusout = new FormEventDataModel
                                {
-                                   VisitGuid = guid,
+                                   VisitGuid = guid.ToString(),
                                    Url = "http://localhost:50342/Demo",
                                    PageId = "DemoForm",
                                    ElementId = "StringValue",
@@ -85,7 +85,7 @@ GxEiNj3e99NQRSg=="), "Url" : "http://localhost:50342/Demo", "PageId" : "DemoForm
             collection.Insert(focusout);
             var blur = new FormEventDataModel
                            {
-                               VisitGuid = guid,
+                               VisitGuid = guid.ToString(),
                                Url = "http://localhost:50342/Demo",
                                PageId = "DemoForm",
                                ElementId = "StringValue",

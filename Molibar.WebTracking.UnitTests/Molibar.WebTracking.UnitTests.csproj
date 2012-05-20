@@ -80,6 +80,7 @@
     <Compile Include="External\Models\Profiles\FormEventFormEventDataModelProfileTests.cs" />
     <Compile Include="External\Models\Profiles\FormEventReplaceableAttributesProfileTests.cs" />
     <Compile Include="External\Models\Profiles\PageEventBsonDocumentProfileTests.cs" />
+    <Compile Include="External\Models\Profiles\PageEventPageEventDataModelProfileTests.cs" />
     <Compile Include="External\MongoDb\Tracking\PageEventRepository_Initialize_Test.cs" />
     <Compile Include="External\MongoDb\Tracking\PageEventRepositoryInsertTest.cs" />
     <Compile Include="External\MongoDb\Tracking\EventRepositoryTest.cs" />

@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IoC\ExternalRegistry.cs" />
+    <Compile Include="Models\EventDataModel.cs" />
     <Compile Include="Models\FormEventDataModel.cs" />
     <Compile Include="Models\PageEventDataModel.cs" />
     <Compile Include="Models\Profiles\FormEventBsonDocumentProfile.cs" />

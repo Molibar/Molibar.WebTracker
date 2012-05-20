@@ -29,7 +29,7 @@ namespace Molibar.WebTracking.UnitTests.External.Models.Profiles
         }
 
         [Test]
-        public void ShouldMapFormEventToFormEventDob()
+        public void ShouldMapFormEventToFormEventDataModel()
         {
             // Arrange
             var formEvent = Builder<FormEvent>.CreateNew()
@@ -43,7 +43,7 @@ namespace Molibar.WebTracking.UnitTests.External.Models.Profiles
             // Assert
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Id, Is.EqualTo(ObjectId.Parse(formEvent.Id)));
-            Assert.That(result.VisitGuid, Is.EqualTo(formEvent.VisitGuid));
+            Assert.That(result.VisitGuid, Is.EqualTo(formEvent.VisitGuid.ToString()));
             Assert.That(result.Url, Is.EqualTo(formEvent.Url));
             Assert.That(result.PageId, Is.EqualTo(formEvent.PageId));
             Assert.That(result.ElementId, Is.EqualTo(formEvent.ElementId));
@@ -63,6 +63,7 @@ namespace Molibar.WebTracking.UnitTests.External.Models.Profiles
             var dateTime = new DateTime(1234, 5, 6, 17, 18, 19, 20);
             var formEventDataModel = Builder<FormEventDataModel>.CreateNew()
                 .With(x => x.Id = ObjectId.GenerateNewId())
+                .With(x => x.VisitGuid = Guid.NewGuid().ToString())
                 .With(x => x.ClientDateTime = clientDateTime)
                 .With(x => x.DateTime = dateTime).Build();
 
@@ -73,7 +74,7 @@ namespace Molibar.WebTracking.UnitTests.External.Models.Profiles
             // Assert
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Id, Is.EqualTo(formEventDataModel.Id.ToString()));
-            Assert.That(result.VisitGuid, Is.EqualTo(formEventDataModel.VisitGuid));
+            Assert.That(result.VisitGuid.ToString(), Is.EqualTo(formEventDataModel.VisitGuid));
             Assert.That(result.Url, Is.EqualTo(formEventDataModel.Url));
             Assert.That(result.PageId, Is.EqualTo(formEventDataModel.PageId));
             Assert.That(result.ElementId, Is.EqualTo(formEventDataModel.ElementId));

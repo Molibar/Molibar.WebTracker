@@ -3,7 +3,7 @@ using MongoDB.Bson;
 
 namespace Molibar.WebTracking.External.Models
 {
-    public class FormEventDataModel : Event
+    public class FormEventDataModel : EventDataModel
     {
         public string ElementValue { get; set; }
         private bool _valueValid = true;
