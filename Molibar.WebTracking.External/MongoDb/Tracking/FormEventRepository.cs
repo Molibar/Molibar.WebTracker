@@ -2,6 +2,7 @@
 using Molibar.Infrastructure.Mapper;
 using Molibar.WebTracking.Domain.Model;
 using Molibar.WebTracking.Domain.Repositories;
+using Molibar.WebTracking.External.Models;
 using MongoDB.Bson;
 
 namespace Molibar.WebTracking.External.MongoDb.Tracking
@@ -18,12 +19,14 @@ namespace Molibar.WebTracking.External.MongoDb.Tracking
 
         public void Insert(FormEvent formEvent)
         {
-            MongoDbProxy.Insert(CollectionName, new[] { formEvent });
+            var formEventDataModel = EntityMapper.Map<FormEventDataModel>(formEvent);
+            MongoDbProxy.Insert(CollectionName, new[] { formEventDataModel });
         }
 
-        public void Insert(IEnumerable<FormEvent> formEntries)
+        public void Insert(IEnumerable<FormEvent> formEvents)
         {
-            MongoDbProxy.Insert(CollectionName, formEntries);
+            var formEventDataModels = EntityMapper.Map<IEnumerable<FormEventDataModel>>(formEvents);
+            MongoDbProxy.Insert(CollectionName, formEventDataModels);
         }
     }
 }

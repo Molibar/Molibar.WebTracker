@@ -18,7 +18,7 @@ namespace Molibar.WebTracking.UnitTests.External.Models.Profiles
         [SetUp]
         public void Setup()
         {
-            Mapper.AddProfile(new FormEventFormEventDobProfile());
+            Mapper.AddProfile(new FormEventFormEventDataModelProfile());
             _entityMapper = new EntityMapper(Mapper.Engine);
         }
 

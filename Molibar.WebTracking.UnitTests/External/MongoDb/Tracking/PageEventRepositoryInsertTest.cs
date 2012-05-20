@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Molibar.WebTracking.Domain.Model;
+using Molibar.WebTracking.External.Models;
 using Molibar.WebTracking.External.MongoDb.Tracking;
 using MongoDB.Bson;
 using NUnit.Framework;
@@ -16,7 +17,9 @@ namespace Molibar.WebTracking.UnitTests.External.MongoDb.Tracking
         {
             // Arrange
             var pageEvent = new PageEvent();
-            _mongoDbProxy.Expect(x => x.Insert(PageEventRepository.COLLECTION_NAME, new[] { pageEvent }));
+            var pageEventDataModel = new PageEventDataModel();
+            _entityMapper.Expect(x => x.Map<PageEventDataModel>(pageEvent)).Return(pageEventDataModel);
+            _mongoDbProxy.Expect(x => x.Insert(PageEventRepository.COLLECTION_NAME, new[] { pageEventDataModel }));
 
             _mockRepository.ReplayAll();
 
@@ -28,11 +31,13 @@ namespace Molibar.WebTracking.UnitTests.External.MongoDb.Tracking
         }
 
         [Test]
-        public void ShouldCallInsertForTheEnumerationOfBsonDocumentSentIn()
+        public void ShouldCallInsertForTheEnumerationOfPageEventsSentIn()
         {
             // Arrange
-            var pageEvents = new List<PageEvent>(new [] { new PageEvent() });
-            _mongoDbProxy.Expect(x => x.Insert(PageEventRepository.COLLECTION_NAME, pageEvents));
+            var pageEvents = new List<PageEvent>(new[] { new PageEvent() });
+            var pageEventDataModels = new List<PageEventDataModel>(new[] { new PageEventDataModel() });
+            _entityMapper.Expect(x => x.Map<IEnumerable<PageEventDataModel>>(pageEvents)).Return(pageEventDataModels);
+            _mongoDbProxy.Expect(x => x.Insert(PageEventRepository.COLLECTION_NAME, pageEventDataModels));
 
             _mockRepository.ReplayAll();
 
