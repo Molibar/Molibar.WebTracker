@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Molibar.WebTracking.External.MongoDb
@@ -8,9 +7,9 @@ namespace Molibar.WebTracking.External.MongoDb
     {
         bool CollectionExists(string collectionName);
         void CreateCollection(string collectionName);
-        void Insert(string collectionName, IEnumerable<BsonDocument> bsonDocuments);
-        MongoCursor<BsonDocument> FindAll(string collectionName);
-        MongoCursor<BsonDocument> Find(string collectionName, string name, string value);
+        void Insert<T>(string collectionName, IEnumerable<T> bsonDocuments);
+        MongoCursor<T> FindAll<T>(string collectionName);
+        MongoCursor<T> Find<T>(string collectionName, string name, string value);
         void RemoveDocuments(string collectionName);
     }
 
@@ -54,23 +53,23 @@ namespace Molibar.WebTracking.External.MongoDb
             MongoDatabase.CreateCollection(collectionName);
         }
 
-        public void Insert(string collectionName, IEnumerable<BsonDocument> bsonDocuments)
+        public void Insert<T>(string collectionName, IEnumerable<T> document)
         {
             var collection = MongoDatabase.GetCollection(collectionName);
-            collection.InsertBatch(bsonDocuments);
+            collection.InsertBatch(document);
         }
 
-        public MongoCursor<BsonDocument> FindAll(string collectionName)
+        public MongoCursor<T> FindAll<T>(string collectionName)
         {
-            var collection = MongoDatabase.GetCollection(collectionName);
-            return collection.FindAll();
+            var collection = MongoDatabase.GetCollection(typeof(T), collectionName);
+            return collection.FindAllAs<T>();
         }
 
-        public MongoCursor<BsonDocument> Find(string collectionName, string name, string value)
+        public MongoCursor<T> Find<T>(string collectionName, string name, string value)
         {
             var collection = MongoDatabase.GetCollection(collectionName);
             var queryDocument = new QueryDocument(name, value);
-            return collection.Find(queryDocument);
+            return collection.FindAs<T>(queryDocument);
         }
 
         public void RemoveDocuments(string collectionName)

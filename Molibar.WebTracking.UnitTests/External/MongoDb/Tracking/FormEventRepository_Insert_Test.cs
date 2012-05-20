@@ -12,13 +12,11 @@ namespace Molibar.WebTracking.UnitTests.External.MongoDb.Tracking
     internal class FormEventRepository_Insert_Test : FormEventRepositoryTest
     {
         [Test]
-        public void ShouldCallInsertForTheBsonDocumentSentIn()
+        public void ShouldCallInsertForTheFormEventSentIn()
         {
             // Arrange
             var formEvent = new FormEvent();
-            var bsonDocument = new BsonDocument();
-            _entityMapper.Expect(x => x.Map<BsonDocument>(formEvent)).Return(bsonDocument);
-            _mongoDbProxy.Expect(x => x.Insert(FormEventRepository.COLLECTION_NAME, new[] { bsonDocument }));
+            _mongoDbProxy.Expect(x => x.Insert(FormEventRepository.COLLECTION_NAME, new[] { formEvent }));
 
             _mockRepository.ReplayAll();
 
@@ -30,13 +28,11 @@ namespace Molibar.WebTracking.UnitTests.External.MongoDb.Tracking
         }
 
         [Test]
-        public void ShouldCallInsertForTheEnumerationOfBsonDocumentSentIn()
+        public void ShouldCallInsertForTheEnumerationOfFormEventsSentIn()
         {
             // Arrange
             var formEvents = new List<FormEvent>(new [] { new FormEvent() });
-            var bsonDocuments = new[] { new BsonDocument() };
-            _entityMapper.Expect(x => x.Map<IEnumerable<BsonDocument>>(formEvents)).Return(bsonDocuments);
-            _mongoDbProxy.Expect(x => x.Insert(FormEventRepository.COLLECTION_NAME, bsonDocuments));
+            _mongoDbProxy.Expect(x => x.Insert(FormEventRepository.COLLECTION_NAME, formEvents));
 
             _mockRepository.ReplayAll();
 

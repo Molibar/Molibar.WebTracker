@@ -3,7 +3,6 @@ using Molibar.Infrastructure.IoC;
 using Molibar.Infrastructure.IoC.StructureMap;
 using Molibar.Infrastructure.Logging;
 using Molibar.Infrastructure.Mapper.AutoMapper;
-using Molibar.WebTracking.Domain.Repositories;
 using Molibar.WebTracking.Presentation.IoC;
 using StructureMap;
 

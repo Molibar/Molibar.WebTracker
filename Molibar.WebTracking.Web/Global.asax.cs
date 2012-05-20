@@ -38,6 +38,7 @@ namespace Molibar.WebTracking.Web
             FilterProviders.Providers.Add(new InjectableFilterProvider(container));
         }
 
+
         protected void Application_Start()
         {
             InitializeContainer();

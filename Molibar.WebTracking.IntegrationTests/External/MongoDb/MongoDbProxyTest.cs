@@ -48,10 +48,10 @@ namespace Molibar.WebTracking.IntegrationTests.External.MongoDb
 
             // Act
             _mongoDbProxy.Insert(_collectionName, bsonDocuments);
-            var all = _mongoDbProxy.FindAll(_collectionName);
+            var all = _mongoDbProxy.FindAll<BsonDocument>(_collectionName);
             var countAfterInsertion = all.Count();
             _mongoDbProxy.RemoveDocuments(_collectionName);
-            all = _mongoDbProxy.FindAll(_collectionName);
+            all = _mongoDbProxy.FindAll<BsonDocument>(_collectionName);
             var countAfterDeletion = all.Count();
 
             // Assert
@@ -86,7 +86,7 @@ namespace Molibar.WebTracking.IntegrationTests.External.MongoDb
             _mongoDbProxy.Insert(_collectionName, bsonDocuments);
 
             // Act
-            var foundBsonDocuments = _mongoDbProxy.FindAll(_collectionName);
+            var foundBsonDocuments = _mongoDbProxy.FindAll<BsonDocument>(_collectionName);
 
             // Assert
             Assert.That(foundBsonDocuments, Is.Not.Null);
@@ -103,7 +103,7 @@ namespace Molibar.WebTracking.IntegrationTests.External.MongoDb
             _mongoDbProxy.Insert(_collectionName, bsonDocuments);
 
             // Assert
-            var foundBsonDocuments = _mongoDbProxy.FindAll(_collectionName);
+            var foundBsonDocuments = _mongoDbProxy.FindAll<BsonDocument>(_collectionName);
             Assert.That(foundBsonDocuments, Is.Not.Null);
             Assert.That(foundBsonDocuments.Count(), Is.EqualTo(bsonDocuments.Count()));
         }
@@ -117,7 +117,7 @@ namespace Molibar.WebTracking.IntegrationTests.External.MongoDb
             _mongoDbProxy.Insert(_collectionName, bsonDocuments);
 
             // Act
-            var foundBsonDocuments = _mongoDbProxy.Find(_collectionName, "Address.ZipCode", "171 63");
+            var foundBsonDocuments = _mongoDbProxy.Find<BsonDocument>(_collectionName, "Address.ZipCode", "171 63");
 
             // Assert
             Assert.That(foundBsonDocuments.Count(), Is.EqualTo(1));

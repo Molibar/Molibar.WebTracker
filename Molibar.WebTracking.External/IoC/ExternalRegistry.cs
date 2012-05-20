@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Molibar.WebTracking.External.MongoDb;
 using StructureMap;
 using StructureMap.Configuration.DSL;
 
@@ -12,6 +13,7 @@ namespace Molibar.WebTracking.External.IoC
             {
                 cfg.Scan(scan =>
                 {
+                    cfg.For<IMongoDbProxy>().Use(x => new MongoDbProxy());
                     scan.AddAllTypesOf<Profile>();
                     scan.TheCallingAssembly();
                     scan.WithDefaultConventions();

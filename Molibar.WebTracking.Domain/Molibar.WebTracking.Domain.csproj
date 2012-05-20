@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IoC\DomainRegistry.cs" />
+    <Compile Include="Model\Event.cs" />
     <Compile Include="Model\FormEvent.cs" />
     <Compile Include="Model\PageEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

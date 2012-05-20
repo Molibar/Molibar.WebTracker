@@ -43,9 +43,7 @@
     <Reference Include="Molibar.Common">
       <HintPath>..\..\bin\Molibar.Framework.1_0_0\Molibar.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Molibar.Infrastructure">
-      <HintPath>..\..\bin\Molibar.Framework.1_0_0\Molibar.Infrastructure.dll</HintPath>
-    </Reference>
+    <Reference Include="Molibar.Infrastructure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
     </Reference>

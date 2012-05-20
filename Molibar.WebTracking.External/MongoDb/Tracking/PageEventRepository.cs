@@ -18,14 +18,12 @@ namespace Molibar.WebTracking.External.MongoDb.Tracking
 
         public void Insert(PageEvent pageEvent)
         {
-            var bsonDocument = EntityMapper.Map<BsonDocument>(pageEvent);
-            Insert(new [] {bsonDocument});
+            MongoDbProxy.Insert(CollectionName, new [] {pageEvent});
         }
 
         public void Insert(IEnumerable<PageEvent> pageEvents)
         {
-            var bsonDocuments = EntityMapper.Map<IEnumerable<BsonDocument>>(pageEvents);
-            Insert(bsonDocuments);
+            MongoDbProxy.Insert(CollectionName, pageEvents);
         }
     }
 }

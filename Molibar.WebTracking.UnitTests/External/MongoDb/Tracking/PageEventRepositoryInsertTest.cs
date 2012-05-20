@@ -12,13 +12,11 @@ namespace Molibar.WebTracking.UnitTests.External.MongoDb.Tracking
     internal class PageEventRepositort_Insert_Test : PageEventRepositoryTest
     {
         [Test]
-        public void ShouldCallInsertForTheBsonDocumentSentIn()
+        public void ShouldCallInsertForThePageEventSentIn()
         {
             // Arrange
             var pageEvent = new PageEvent();
-            var bsonDocument = new BsonDocument();
-            _entityMapper.Expect(x => x.Map<BsonDocument>(pageEvent)).Return(bsonDocument);
-            _mongoDbProxy.Expect(x => x.Insert(PageEventRepository.COLLECTION_NAME, new[] { bsonDocument }));
+            _mongoDbProxy.Expect(x => x.Insert(PageEventRepository.COLLECTION_NAME, new[] { pageEvent }));
 
             _mockRepository.ReplayAll();
 
@@ -34,9 +32,7 @@ namespace Molibar.WebTracking.UnitTests.External.MongoDb.Tracking
         {
             // Arrange
             var pageEvents = new List<PageEvent>(new [] { new PageEvent() });
-            var bsonDocuments = new[] { new BsonDocument() };
-            _entityMapper.Expect(x => x.Map<IEnumerable<BsonDocument>>(pageEvents)).Return(bsonDocuments);
-            _mongoDbProxy.Expect(x => x.Insert(PageEventRepository.COLLECTION_NAME, bsonDocuments));
+            _mongoDbProxy.Expect(x => x.Insert(PageEventRepository.COLLECTION_NAME, pageEvents));
 
             _mockRepository.ReplayAll();
 
